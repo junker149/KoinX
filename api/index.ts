@@ -16,6 +16,11 @@ app.use(express.json());
 // Call the function to get the data initially
 getCoinData();
 
+// Landing Page
+app.get("/", (req, res) => {
+  res.send("Hello to Koinx Team!");
+});
+
 // Schedule the function to run every 2 hours
 cron.schedule("0 */2 * * *", () => {
   try {
