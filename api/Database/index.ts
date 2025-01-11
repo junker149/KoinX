@@ -18,7 +18,11 @@ const coinSchema = new mongoose.Schema({
     price: Number,
     market_cap: Number,
     day_change: Number
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 const Coin: Model<coin> = mongoose.model<coin>('Coin', coinSchema);
 
