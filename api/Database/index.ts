@@ -6,44 +6,20 @@ const URL = process.env.MONGO_URI;
 
 mongoose.connect(URL);
 
-interface Bitcoin extends mongoose.Document {
+interface coin extends mongoose.Document {
+    name: string;
     price: number;
     market_cap: number;
     day_change: number;
 }
 
-interface Matic extends mongoose.Document {
-    price: number;
-    market_cap: number;
-    day_change: number;
-}
-
-interface Ethereum extends mongoose.Document {
-    price: number;
-    market_cap: number;
-    day_change: number;
-}
-
-const bitcoinSchema = new mongoose.Schema({
+const coinSchema = new mongoose.Schema({
+    name: String,
     price: Number,
     market_cap: Number,
     day_change: Number
 });
 
-const maticSchema = new mongoose.Schema({
-    price: Number,
-    market_cap: Number,
-    day_change: Number
-});
+const Coin: Model<coin> = mongoose.model<coin>('Coin', coinSchema);
 
-const ethereumSchema = new mongoose.Schema({
-    price: Number,
-    market_cap: Number,
-    day_change: Number
-});
-
-const Bitcoin: Model<Bitcoin> = mongoose.model<Bitcoin>('Bitcoin', bitcoinSchema);
-const Matic: Model<Matic> = mongoose.model<Matic>('Matic', maticSchema);
-const Ethereum: Model<Ethereum> = mongoose.model<Ethereum>('Ethereum', ethereumSchema);
-
-export { Bitcoin, Matic, Ethereum };
+export { Coin };
