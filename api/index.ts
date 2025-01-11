@@ -7,6 +7,7 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import calculateDeviation from "./Functions/calculateDeviation";
 dotenv.config();
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
 const app = express();
 
@@ -101,6 +102,10 @@ app.get("/api/v1/deviation/:name", async (req: Request, res: Response) => {
     });
   }
 });
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  app(req as any, res as any);
+}
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
