@@ -8,10 +8,14 @@ interface CoinInfo {
 };
 
 export default async function saveCoinData(coin: CoinInfo) {
-    await Coin.create({
-        name: coin.id,
-        price: coin.current_price,
-        market_cap: coin.market_cap,
-        day_change: coin.price_change_24h
-    });
+    try {
+        await Coin.create({
+            name: coin.id,
+            price: coin.current_price,
+            market_cap: coin.market_cap,
+            day_change: coin.price_change_24h
+        });
+    } catch (err) {
+        console.log(err);
+    }
 };

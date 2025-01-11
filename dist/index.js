@@ -38,6 +38,12 @@ node_cron_1.default.schedule("0 */2 * * *", () => {
 app.get("/api/v1/stats/:name", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const name = req.params.name;
+        // Validate
+        if (name !== "bitcoin" && name !== "ethereum" && name !== "matic-network") {
+            return res.status(400).json({
+                message: "Usage: /api/v1/stats/bitcoin or /api/v1/stats/ethereum or /api/v1/stats/matic-network"
+            });
+        }
         // Get the latest entry
         const coin = yield Database_1.Coin.findOne({ name: name }).sort({ createdAt: -1 });
         // If no entry is found
@@ -64,6 +70,12 @@ app.get("/api/v1/stats/:name", (req, res) => __awaiter(void 0, void 0, void 0, f
 app.get("/api/v1/deviation/:name", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const name = req.params.name;
+        // Validate
+        if (name !== "bitcoin" && name !== "ethereum" && name !== "matic-network") {
+            return res.status(400).json({
+                message: "Usage: /api/v1/deviation/bitcoin or /api/v1/deviation/ethereum or /api/v1/deviation/matic-network"
+            });
+        }
         // Get the last 100 entries
         const entries = yield Database_1.Coin.find({ name: name }).sort({ createdAt: -1 }).limit(100);
         // Isolate the price data

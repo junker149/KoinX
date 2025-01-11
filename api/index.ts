@@ -30,6 +30,13 @@ app.get("/api/v1/stats/:name", async (req: Request, res: Response) => {
   try {
     const name = req.params.name;
 
+    // Validate
+    if( name !== "bitcoin" && name !== "ethereum" && name !== "matic-network") {
+      return res.status(400).json({
+        message: "Usage: /api/v1/stats/bitcoin or /api/v1/stats/ethereum or /api/v1/stats/matic-network"
+      });
+    }
+
     // Get the latest entry
     const coin = await Coin.findOne({ name: name }).sort({ createdAt: -1 });
 
@@ -59,6 +66,13 @@ app.get("/api/v1/stats/:name", async (req: Request, res: Response) => {
 app.get("/api/v1/deviation/:name", async (req: Request, res: Response) => {
   try {
     const name = req.params.name;
+
+    // Validate
+    if( name !== "bitcoin" && name !== "ethereum" && name !== "matic-network") {
+      return res.status(400).json({
+        message: "Usage: /api/v1/deviation/bitcoin or /api/v1/deviation/ethereum or /api/v1/deviation/matic-network"
+      });
+    }
 
     // Get the last 100 entries
     const entries = await Coin.find({ name: name }).sort({ createdAt: -1 }).limit(100);

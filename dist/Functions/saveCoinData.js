@@ -14,12 +14,17 @@ const index_1 = require("../Database/index");
 ;
 function saveCoinData(coin) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield index_1.Coin.create({
-            name: coin.id,
-            price: coin.current_price,
-            market_cap: coin.market_cap,
-            day_change: coin.price_change_24h
-        });
+        try {
+            yield index_1.Coin.create({
+                name: coin.id,
+                price: coin.current_price,
+                market_cap: coin.market_cap,
+                day_change: coin.price_change_24h
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
 }
 ;
