@@ -14,6 +14,8 @@ const coinSchema = new mongoose_1.default.Schema({
     price: Number,
     market_cap: Number,
     day_change: Number
+}, {
+    timestamps: true
 });
 const Coin = mongoose_1.default.model('Coin', coinSchema);
 exports.Coin = Coin;
